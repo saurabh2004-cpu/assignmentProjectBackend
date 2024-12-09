@@ -17,7 +17,7 @@ router.route('/google')
 
 
 // Callback route for Google OAuth
-router.route('https://assignment-project-frontend-cbs5.vercel.app/auth/google/callback')
+router.route('/auth/google/callback')
   .get(passport.authenticate('google', { session: false, failureRedirect: '/signUp' }), googleCallback);
 
 
