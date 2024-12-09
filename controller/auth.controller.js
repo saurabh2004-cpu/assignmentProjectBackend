@@ -151,16 +151,16 @@ const logoutUser = async (req, res) => {
 const getCurrentUser = async (req, res) => {
     try {
         const accessToken = req.cookies.accessToken;
-        console.log("accessToken", accessToken);
+        if (!accessToken) {
+            return res.status(404).json({ message: "accesstoken not found" });
+        }
 
         const decodedAccessToken = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET || 'secret');
+        if (!decodedAccessToken) {
+            return res.status(404).json({ message: "accesstoken not found" });
+        }
 
-        console.log("decodedAccessToken", decodedAccessToken._id);
         const user = await User.findById(decodedAccessToken._id);
-        console.log("user", user);
-
-
-
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
