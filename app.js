@@ -6,13 +6,12 @@ import connectDB from './db/index.js';
 import dotenv from 'dotenv';
 import initializingPassport from './utils/passportConfig.js';
 import passport from 'passport';
-import session from 'express-session';
 
 
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5001;
 
 // Import routes
 import authRouter from './routes/authRoutes.js';
