@@ -152,17 +152,17 @@ const getCurrentUser = async (req, res) => {
     try {
         const accessToken = req.cookies.accessToken;
         if (!accessToken) {
-            return res.status(404).json({ message: "accesstoken not found" });
+            console.error("acesstoken not found");
         }
 
         const decodedAccessToken = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET || 'secret');
         if (!decodedAccessToken) {
-            return res.status(404).json({ message: "accesstoken not found" });
+            console.error("decodedAccessToken not found");
         }
 
         const user = await User.findById(decodedAccessToken._id);
         if (!user) {
-            return res.status(404).json({ message: "User not found" });
+           console.error("user not found");
         }
 
         return res.status(200).json({ message: "Current user fetched successfully", user });
