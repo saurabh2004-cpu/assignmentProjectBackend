@@ -186,7 +186,7 @@ const googleCallback = async (req, res) => {
         // Send tokens via cookies or JSON response
         res
             .cookie('accessToken', accessToken, options)
-            .redirect('https://assignment-project-frontend-cbs5.vercel.app/')
+            .redirect(`https://assignment-project-frontend-cbs5.vercel.app/dashboard?token=${accessToken}`)
     }catch (error) {
         console.error("Error during Google callback:", error.message);
         return res.status(500).json({ message: "Internal server error" });
