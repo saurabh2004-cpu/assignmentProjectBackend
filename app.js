@@ -52,6 +52,9 @@ app.use(passport.initialize());
 app.use('/api/auth', authRouter);
 
 app.use('/api/userData', userDataRouter)
+app.get('/', (req, res) => {
+  res.status(200).send('Welcome to the API!');
+});
 
 
 connectDB()
