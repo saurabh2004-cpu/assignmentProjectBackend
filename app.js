@@ -6,16 +6,19 @@ import connectDB from './db/index.js';
 import dotenv from 'dotenv';
 import initializingPassport from './utils/passportConfig.js';
 import passport from 'passport';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
+// Import routes
+import authRouter from './routes/authRoutes.js';
+import userDataRouter from './routes/userDataRoutes.js';
 
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
-
-// Import routes
-import authRouter from './routes/authRoutes.js';
-import userDataRouter from './routes/userDataRoutes.js';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 // Configure CORS 
@@ -31,6 +34,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use('/public', express.static(path.join(__dirname, 'src/public')));
 
 
 
