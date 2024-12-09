@@ -11,7 +11,7 @@ import passport from 'passport';
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 5121;
+const port = process.env.PORT || 5000;
 
 // Import routes
 import authRouter from './routes/authRoutes.js';
