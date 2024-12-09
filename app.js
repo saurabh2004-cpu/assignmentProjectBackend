@@ -11,7 +11,7 @@ import passport from 'passport';
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5121;
 
 // Import routes
 import authRouter from './routes/authRoutes.js';
@@ -46,7 +46,7 @@ app.use('/api/userData', userDataRouter)
 
 connectDB()
   .then(() => {
-    app.listen(port, () => {
+    app.listen(5000, () => {
       console.log(`Server listening on port: ${port}!`);
     });
 
