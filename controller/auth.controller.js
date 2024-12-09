@@ -151,9 +151,14 @@ const logoutUser = async (req, res) => {
 const getCurrentUser = async (req, res) => {
     try {
         const accessToken = req.cookies.accessToken;
+        console.log("accessToken", accessToken);
 
         const decodedAccessToken = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET || 'secret');
+
+        console.log("decodedAccessToken", decodedAccessToken._id);
         const user = await User.findById(decodedAccessToken._id);
+        console.log("user", user);
+
 
 
         if (!user) {

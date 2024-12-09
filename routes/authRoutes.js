@@ -21,5 +21,4 @@ router.route('/auth/google/callback')
   .get(passport.authenticate('google', { session: false, failureRedirect: '/signUp' }), googleCallback);
 
 
-
 export default router 
