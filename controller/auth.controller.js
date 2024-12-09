@@ -1,6 +1,6 @@
 import User from "../models/user.model.js"
 import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken"   
 
 const hello = async (req, res) => {
     const word = "hello word"
