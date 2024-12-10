@@ -8,7 +8,7 @@ const initializingPassport = (passport) => {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'https://assignment-project-frontend-cbs5.vercel.app/api/auth/auth/google/callback',   //same as in google console
+        callbackURL: 'https://assignment-project-frontend-cbs5.vercel.app/api/auth/google/callback'//same as in google console   
       },
       async (accessToken, refreshToken,profile, done) => {
 
