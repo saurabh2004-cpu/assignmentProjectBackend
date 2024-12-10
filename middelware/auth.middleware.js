@@ -8,20 +8,20 @@ export const verifyJwt =  async (req, _ ,next)=>
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ","")
 
         if(!token){
-            throw new error("Token not found")
+            throw error("Access token not found")
         }
     
         const decodedToken = jwt.verify(token,process.env.ACCESS_TOKEN_SECRET)
         const user = await User.findById(decodedToken?._id).select("-password -refreshToken")
     
         if(!user){
-            throw new error("User not found")
+            throw error("User not found")
         }
     
         req.user=user;
         next()
     } catch (error) {
-        throw new error(error.message)
+       throw error(error.message)
     }
 
 }
