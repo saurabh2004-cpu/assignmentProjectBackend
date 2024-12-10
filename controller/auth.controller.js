@@ -62,6 +62,7 @@ const registerUser = async (req, res) => {
         const options = {
             httpOnly: true,
             secure: true,
+            sameSite: 'None'
         }
 
         return res
@@ -112,6 +113,7 @@ const loginUser = async (req, res) => {
         const options = {
             httpOnly: true,
             secure: true,
+            sameSite: 'None'
         }
 
         return res
@@ -178,7 +180,8 @@ const googleCallback = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: true, 
+            secure: true,
+            sameSite: 'None' 
         };
 
         // Send tokens
