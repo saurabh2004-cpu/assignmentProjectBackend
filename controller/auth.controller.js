@@ -1,6 +1,6 @@
 import User from "../models/user.model.js"
 import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"   
+import jwt from "jsonwebtoken"
 
 const hello = async (req, res) => {
     const word = "hello word"
@@ -60,10 +60,10 @@ const registerUser = async (req, res) => {
         const accessToken = await generateAccessTokens(user._id)
 
         const options = {
-            httponly: true,
+            httpOnly: true,
             secure: true,
-            maxAge: 24 * 60 * 60 * 1000  //1d
         }
+
         return res
             .status(200)
             .cookie("accessToken", accessToken, options)
@@ -110,10 +110,10 @@ const loginUser = async (req, res) => {
         const accessToken = await generateAccessTokens(user._id)
 
         const options = {
-            httponly: true,
+            httpOnly: true,
             secure: true,
-            maxAge: 24 * 60 * 60 * 1000  //1d
         }
+
         return res
             .status(200)
             .cookie("accessToken", accessToken, options)
@@ -135,6 +135,7 @@ const logoutUser = async (req, res) => {
             httpOnly: true,
             secure: true,
         }
+        
         return res
             .status(200)
             .clearCookie("accessToken", options)
@@ -150,19 +151,15 @@ const logoutUser = async (req, res) => {
 //get current user
 const getCurrentUser = async (req, res) => {
     try {
-        const accessToken = req.cookies.accessToken;
-        if (!accessToken) {
-            console.error("acesstoken not found");
-        }
-
-        const decodedAccessToken = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET || 'secret');
-        if (!decodedAccessToken) {
-            console.error("decodedAccessToken not found");
-        }
-
-        const user = await User.findById(decodedAccessToken._id);
+        const userId = await req.user._id
         if (!user) {
-           console.error("user not found");
+            console.error("user not found")
+        }
+
+        const user = await User.findById(userId)
+
+        if (!user) {
+            console.error("user not found")
         }
 
         return res.status(200).json({ message: "Current user fetched successfully", user });
@@ -175,19 +172,20 @@ const getCurrentUser = async (req, res) => {
 
 const googleCallback = async (req, res) => {
     try {
+
         // console.log("req.user",req.user);
         const accessToken = await generateAccessTokens(req.user._id);
 
         const options = {
             httpOnly: true,
-            secure: true, // Use `true` if you're using HTTPS
+            secure: true, 
         };
 
-        // Send tokens via cookies or JSON response
+        // Send tokens
         res
             .cookie('accessToken', accessToken, options)
-            .redirect(`https://assignment-project-frontend-cbs5.vercel.app/dashboard?token=${accessToken}`)
-    }catch (error) {
+            .redirect(`https://assignment-project-frontend-cbs5.vercel.app/?token=${accessToken}`)
+    } catch (error) {
         console.error("Error during Google callback:", error.message);
         return res.status(500).json({ message: "Internal server error" });
     }

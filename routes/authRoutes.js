@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getCurrentUser, googleCallback, hello, loginUser, logoutUser, registerUser } from "../controller/auth.controller.js";
 import passport from "passport";
+import { verifyJwt } from "../middelware/auth.middleware.js";
 
 const router = Router()
 
@@ -8,8 +9,8 @@ router.route('/hello').get(hello)
 
 router.route('/signUp').post(registerUser)
 router.route('/sign-in').post(loginUser)
-router.route('/logout').post(logoutUser)
-router.route('/getCurrentUser').get(getCurrentUser)
+router.route('/logout').post(verifyJwt,logoutUser)
+router.route('/getCurrentUser').get(verifyJwt,getCurrentUser)
 
 //google auth
 router.route('/google')
