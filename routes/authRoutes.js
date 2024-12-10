@@ -9,7 +9,7 @@ router.route('/hello').get(hello)
 
 router.route('/signUp').post(registerUser)
 router.route('/sign-in').post(loginUser)
-router.route('/logout').post(verifyJwt,logoutUser)
+router.route('/logout').post(logoutUser)
 router.route('/getCurrentUser').get(verifyJwt,getCurrentUser)
 
 //google auth
