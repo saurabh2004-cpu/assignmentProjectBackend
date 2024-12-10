@@ -154,14 +154,14 @@ const logoutUser = async (req, res) => {
 const getCurrentUser = async (req, res) => {
     try {
         const userId = await req.user._id
-        if (!user) {
-            console.error("user not found")
+        if (!userId) {
+            throw error("user not found")
         }
 
         const user = await User.findById(userId)
 
         if (!user) {
-            console.error("user not found")
+            throw error("user not found")
         }
 
         return res.status(200).json({ message: "Current user fetched successfully", user });
