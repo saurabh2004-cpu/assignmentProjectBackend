@@ -23,8 +23,7 @@ const __dirname = path.dirname(__filename);
 
 // Configure CORS 
 const allowedOrigins = [
-  'http://localhost:3000',
-  'https://assignment-project-frontend-cbs5.vercel.app' , // Add this origin
+  // 'http://localhost:3000/',
   process.env.ALLOWED_ORIGIN
 ];
 
